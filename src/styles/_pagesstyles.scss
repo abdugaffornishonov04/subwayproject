@@ -113,8 +113,8 @@
   font-size: 23px;
 
   &:focus {
-      outline: none;
-    }
+    outline: none !important;
+  }
 
   @media (max-width:380px) {
     height: 50px;

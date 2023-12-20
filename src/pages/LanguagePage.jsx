@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { LANGGOON } from "../data/languagesGoOn";
 import { LANGUAGES } from "../data/languagesdata";
+import MainLoading from "../components/loading/MainLoading";
 
 const LanguagePage = () => {
+  const [langLoadingTrue, setLangLoadingTrue] = useState(false);
   const [selectedButtonId, setSelectedButtonId] = useState(null);
   const [langNextButton, setLangNextButton] = useState(false);
 
@@ -11,8 +13,12 @@ const LanguagePage = () => {
   const nextButtonsText = nextButtonsIdObject ? nextButtonsIdObject.text : "";
 
   const langButtonHandler = (id) => {
-    setSelectedButtonId(id);
-    setLangNextButton(true);
+    setLangLoadingTrue(true);
+    setTimeout(() => {
+      setLangLoadingTrue(false);
+      setSelectedButtonId(id);
+      setLangNextButton(true);
+    }, 600);
   };
 
   return (
@@ -46,6 +52,8 @@ const LanguagePage = () => {
           <img src="/arrow-right.png" alt="" />
         </button>
       </div>
+
+      <div>{langLoadingTrue ? <MainLoading /> : <></>}</div>
     </section>
   );
 };
